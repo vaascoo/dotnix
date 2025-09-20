@@ -4,9 +4,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    (agenix.override {
-      ageBin = "${pkgs.age}/bin/age";
-    })
+    agenix
     distrobox
     dnsutils
     docker-compose
@@ -55,8 +53,8 @@
   users.users = {
     vasco = {
       isNormalUser = true;
-      description = "Vasco Correia"; # full name in gdm
-      extraGroups = ["audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout" "fuse"]; # Enable ‘sudo’ for the user.
+      description = "Vasco Correia";
+      extraGroups = ["audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout" "fuse"];
       initialHashedPassword = "$6$DzeNGzM3T9/NALiy$iHZ.pTMGbqhdMzcpwTuZ8dM6zGGoH.7M/m5GBAK5v3tdg2rpYcnSq8k3VlEwsvbOjv/fcK2BR7E8yt69nE9BR/";
       shell = pkgs.zsh;
     };
@@ -77,6 +75,4 @@
   services.avahi.enable = true;
   services.flatpak.enable = true;
   programs.zsh.enable = true;
-
-  programs.steam.enable = true;
 }

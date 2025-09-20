@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   gnomeApps = with pkgs; [
-    albert
+    pkgs.unstable.albert
     dconf-editor
     gnome-screenshot
     gnome-system-monitor
