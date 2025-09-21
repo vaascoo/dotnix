@@ -1,20 +1,16 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, ... }:
-
-with lib.hm.gvariant;
-
-{
+{lib, ...}:
+with lib.hm.gvariant; {
   dconf.settings = {
     "apps/seahorse/listing" = {
-      keyrings-selected = [ "gnupg://" ];
+      keyrings-selected = ["gnupg://"];
     };
-
 
     "org/gnome/Console" = {
       custom-font = "JetBrainsMonoNL Nerd Font Mono 10";
       font-scale = 1.8;
       last-window-maximised = false;
-      last-window-size = mkTuple [ 1920 1168 ];
+      last-window-size = mkTuple [1920 1168];
       theme = "night";
       use-system-font = false;
     };
@@ -22,7 +18,7 @@ with lib.hm.gvariant;
     "org/gnome/calendar" = {
       active-view = "month";
       window-maximized = true;
-      window-size = mkTuple [ 768 600 ];
+      window-size = mkTuple [768 600];
     };
 
     "org/gnome/cheese" = {
@@ -37,16 +33,16 @@ with lib.hm.gvariant;
     "org/gnome/clocks/state/window" = {
       maximized = false;
       panel-id = "world";
-      size = mkTuple [ 870 690 ];
+      size = mkTuple [870 690];
     };
 
     "org/gnome/control-center" = {
       last-panel = "multitasking";
-      window-state = mkTuple [ 1890 1162 false ];
+      window-state = mkTuple [1890 1162 false];
     };
 
     "org/gnome/desktop/app-folders/folders/YaST" = {
-      categories = [ "X-SuSE-YaST" ];
+      categories = ["X-SuSE-YaST"];
       name = "suse-yast.directory";
       translate = true;
     };
@@ -60,10 +56,9 @@ with lib.hm.gvariant;
       secondary-color = "#000000000000";
     };
 
-
     "org/gnome/desktop/input-sources" = {
-      sources = [ (mkTuple [ "xkb" "pt" ]) (mkTuple [ "xkb" "us" ]) ];
-      xkb-options = [ "terminate:ctrl_alt_bksp" ];
+      sources = [(mkTuple ["xkb" "pt"]) (mkTuple ["xkb" "us"])];
+      xkb-options = ["terminate:ctrl_alt_bksp"];
     };
 
     "org/gnome/desktop/interface" = {
@@ -80,7 +75,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-settings" "firefox" "gnome-power-panel" "discord" "spotify" "thunderbird" "gnome-network-panel" "code" "slack" "org-gnome-screenshot" "zoom" "org-gnome-nautilus" "idea-ultimate" "code-url-handler" "org-gnome-evince" "chromium-browser" "transmission-gtk" "brave-browser" "org-gnome-console" "ca-desrt-dconf-editor" "pavucontrol" "obsidian" "webcord" "org-gnome-epiphany" "org-gnome-software" "org-gnome-extensions" ];
+      application-children = ["org-gnome-settings" "firefox" "gnome-power-panel" "discord" "spotify" "thunderbird" "gnome-network-panel" "code" "slack" "org-gnome-screenshot" "zoom" "org-gnome-nautilus" "idea-ultimate" "code-url-handler" "org-gnome-evince" "chromium-browser" "transmission-gtk" "brave-browser" "org-gnome-console" "ca-desrt-dconf-editor" "pavucontrol" "obsidian" "webcord" "org-gnome-epiphany" "org-gnome-software" "org-gnome-extensions"];
       show-banners = true;
     };
 
@@ -229,7 +224,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/search-providers" = {
-      sort-order = [ "org.gnome.Settings.desktop" "org.gnome.Contacts.desktop" "org.gnome.Nautilus.desktop" ];
+      sort-order = ["org.gnome.Settings.desktop" "org.gnome.Contacts.desktop" "org.gnome.Nautilus.desktop"];
     };
 
     "org/gnome/desktop/session" = {
@@ -242,23 +237,23 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Shift><Super>q" ];
+      close = ["<Shift><Super>q"];
       maximize = [];
       minimize = [];
       move-to-monitor-down = [];
       move-to-monitor-left = [];
       move-to-monitor-right = [];
       move-to-monitor-up = [];
-      move-to-workspace-1 = [ "<Super><Shift>1" ];
-      move-to-workspace-10 = [ "<Super><Shift>0" ];
-      move-to-workspace-2 = [ "<Super><Shift>2" ];
-      move-to-workspace-3 = [ "<Super><Shift>3" ];
-      move-to-workspace-4 = [ "<Super><Shift>4" ];
-      move-to-workspace-5 = [ "<Super><Shift>5" ];
-      move-to-workspace-6 = [ "<Super><Shift>6" ];
-      move-to-workspace-7 = [ "<Super><Shift>7" ];
-      move-to-workspace-8 = [ "<Super><Shift>8" ];
-      move-to-workspace-9 = [ "<Super><Shift>9" ];
+      move-to-workspace-1 = ["<Super><Shift>1"];
+      move-to-workspace-10 = ["<Super><Shift>0"];
+      move-to-workspace-2 = ["<Super><Shift>2"];
+      move-to-workspace-3 = ["<Super><Shift>3"];
+      move-to-workspace-4 = ["<Super><Shift>4"];
+      move-to-workspace-5 = ["<Super><Shift>5"];
+      move-to-workspace-6 = ["<Super><Shift>6"];
+      move-to-workspace-7 = ["<Super><Shift>7"];
+      move-to-workspace-8 = ["<Super><Shift>8"];
+      move-to-workspace-9 = ["<Super><Shift>9"];
       move-to-workspace-down = [];
       move-to-workspace-last = [];
       move-to-workspace-left = [];
@@ -270,16 +265,16 @@ with lib.hm.gvariant;
       switch-group-backward = [];
       switch-panels = [];
       switch-panels-backward = [];
-      switch-to-workspace-1 = [ "<Super>1" ];
-      switch-to-workspace-10 = [ "<Super>0" ];
-      switch-to-workspace-2 = [ "<Super>2" ];
-      switch-to-workspace-3 = [ "<Super>3" ];
-      switch-to-workspace-4 = [ "<Super>4" ];
-      switch-to-workspace-5 = [ "<Super>5" ];
-      switch-to-workspace-6 = [ "<Super>6" ];
-      switch-to-workspace-7 = [ "<Super>7" ];
-      switch-to-workspace-8 = [ "<Super>8" ];
-      switch-to-workspace-9 = [ "<Super>9" ];
+      switch-to-workspace-1 = ["<Super>1"];
+      switch-to-workspace-10 = ["<Super>0"];
+      switch-to-workspace-2 = ["<Super>2"];
+      switch-to-workspace-3 = ["<Super>3"];
+      switch-to-workspace-4 = ["<Super>4"];
+      switch-to-workspace-5 = ["<Super>5"];
+      switch-to-workspace-6 = ["<Super>6"];
+      switch-to-workspace-7 = ["<Super>7"];
+      switch-to-workspace-8 = ["<Super>8"];
+      switch-to-workspace-9 = ["<Super>9"];
       switch-to-workspace-last = [];
       switch-to-workspace-left = [];
       switch-to-workspace-right = [];
@@ -298,7 +293,7 @@ with lib.hm.gvariant;
 
     "org/gnome/epiphany/state" = {
       is-maximized = false;
-      window-size = mkTuple [ 1920 876 ];
+      window-size = mkTuple [1920 876];
     };
 
     "org/gnome/evince" = {
@@ -317,7 +312,7 @@ with lib.hm.gvariant;
       sidebar-page = "thumbnails";
       sidebar-size = 132;
       sizing-mode = "free";
-      window-ratio = mkTuple [ 1.481481 1.387626 ];
+      window-ratio = mkTuple [1.481481 1.387626];
       zoom = 0.852153;
     };
 
@@ -337,7 +332,7 @@ with lib.hm.gvariant;
       sidebar-size = 300;
       sort-method = "name";
       sort-type = "ascending";
-      window-size = mkTuple [ (-1) (-1) ];
+      window-size = mkTuple [(-1) (-1)];
     };
 
     "org/gnome/file-roller/listing" = {
@@ -392,8 +387,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/nautilus/window-state" = {
-      initial-size = mkTuple [ 1920 1168 ];
-      initial-size-file-chooser = mkTuple [ 890 550 ];
+      initial-size = mkTuple [1920 1168];
+      initial-size-file-chooser = mkTuple [890 550];
       maximized = true;
     };
 
@@ -440,16 +435,16 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" ];
+      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"];
       help = [];
-      logout = [ "<Shift><Super>e" ];
-      next = [ "XF86HangupPhone" ];
-      next-static = [ "XF86AudioNext" "<Ctrl>XF86AudioNext" "XF86HangupPhone" ];
-      play = [ "XF86NotificationCenter" ];
-      previous = [ "XF86PickupPhone" ];
-      previous-static = [ "XF86AudioPrev" "<Ctrl>XF86AudioPrev" "XF86PickupPhone" ];
+      logout = ["<Shift><Super>e"];
+      next = ["XF86HangupPhone"];
+      next-static = ["XF86AudioNext" "<Ctrl>XF86AudioNext" "XF86HangupPhone"];
+      play = ["XF86NotificationCenter"];
+      previous = ["XF86PickupPhone"];
+      previous-static = ["XF86AudioPrev" "<Ctrl>XF86AudioPrev" "XF86PickupPhone"];
       rotate-video-lock-static = [];
-      screensaver = [ "<Super>q" ];
+      screensaver = ["<Super>q"];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -477,13 +472,13 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      command-history = [ "lg" ];
+      command-history = ["lg"];
       disable-user-extensions = false;
-      disabled-extensions = [ "windowsNavigator@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com" "pop-shell@system76.com" "blur-my-shell@aunetx" "trayIconsReloaded@selfmade.pl" "dash-to-dock@micxgx.gmail.com" "tiling-assistant@leleat-on-github" ];
-      enabled-extensions = [ "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "appindicatorsupport@rgcjonas.gmail.com" "Vitals@CoreCoding.com" "paperwm@paperwm.github.com" ];
+      disabled-extensions = ["windowsNavigator@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com" "pop-shell@system76.com" "blur-my-shell@aunetx" "trayIconsReloaded@selfmade.pl" "dash-to-dock@micxgx.gmail.com" "tiling-assistant@leleat-on-github"];
+      enabled-extensions = ["launch-new-instance@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "appindicatorsupport@rgcjonas.gmail.com" "Vitals@CoreCoding.com" "paperwm@paperwm.github.com"];
       favorite-apps = [];
       last-selected-power-profile = "power-saver";
-      looking-glass-history = [ "exit" "quit()" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'on'" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'off'" ];
+      looking-glass-history = ["exit" "quit()" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'on'" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'off'"];
       remember-mount-password = false;
       welcome-dialog-last-shown-version = "43.2";
     };
@@ -534,26 +529,26 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/paperwm/keybindings" = {
-      close-window = [ "" ];
-      move-down = [ "<Shift><Super>j" ];
-      move-down-workspace = [ "<Shift><Super>n" ];
-      move-left = [ "<Shift><Super>h" ];
-      move-right = [ "<Shift><Super>l" ];
-      move-up = [ "<Shift><Super>k" ];
-      move-up-workspace = [ "<Shift><Super>p" ];
-      new-window = [ "" ];
-      switch-down = [ "<Super>j" ];
-      switch-down-workspace = [ "<Super>n" ];
-      switch-left = [ "<Super>h" ];
-      switch-next = [ "" ];
-      switch-previous = [ "" ];
-      switch-right = [ "<Super>l" ];
-      switch-up = [ "<Super>k" ];
-      switch-up-workspace = [ "<Super>p" ];
+      close-window = [""];
+      move-down = ["<Shift><Super>j"];
+      move-down-workspace = ["<Shift><Super>n"];
+      move-left = ["<Shift><Super>h"];
+      move-right = ["<Shift><Super>l"];
+      move-up = ["<Shift><Super>k"];
+      move-up-workspace = ["<Shift><Super>p"];
+      new-window = [""];
+      switch-down = ["<Super>j"];
+      switch-down-workspace = ["<Super>n"];
+      switch-left = ["<Super>h"];
+      switch-next = [""];
+      switch-previous = [""];
+      switch-right = ["<Super>l"];
+      switch-up = ["<Super>k"];
+      switch-up-workspace = ["<Super>p"];
     };
 
     "org/gnome/shell/extensions/paperwm/workspaces" = {
-      list = [ "2bb41f90-ba52-4d14-aed5-02cac907f359" "5b53e196-7e2a-41be-9848-daca39232946" "5da64119-6dc6-4fc5-b4ff-d80223b6c47d" "f855fc26-eda3-49c5-95cc-b617e5369756" "0248e38b-514e-443c-8947-47b1b07189ea" "41a925fd-1355-49a5-b750-bfab0fc10e7e" "ef05a4ed-6682-463c-891b-e0fa42735693" "3e280f39-1247-4060-b0d3-c4e5991d3655" "92ac8bac-7d0b-4d57-8014-a94bdcdf9d1f" "1b9bf06a-ea59-41af-bfc3-60ea87cf9de7" ];
+      list = ["2bb41f90-ba52-4d14-aed5-02cac907f359" "5b53e196-7e2a-41be-9848-daca39232946" "5da64119-6dc6-4fc5-b4ff-d80223b6c47d" "f855fc26-eda3-49c5-95cc-b617e5369756" "0248e38b-514e-443c-8947-47b1b07189ea" "41a925fd-1355-49a5-b750-bfab0fc10e7e" "ef05a4ed-6682-463c-891b-e0fa42735693" "3e280f39-1247-4060-b0d3-c4e5991d3655" "92ac8bac-7d0b-4d57-8014-a94bdcdf9d1f" "1b9bf06a-ea59-41af-bfc3-60ea87cf9de7"];
     };
 
     "org/gnome/shell/extensions/paperwm/workspaces/0248e38b-514e-443c-8947-47b1b07189ea" = {
@@ -602,7 +597,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/vitals" = {
-      hot-sensors = [ "_memory_usage_" "__network-rx_max__" "__temperature_max__" ];
+      hot-sensors = ["_memory_usage_" "__network-rx_max__" "__temperature_max__"];
       position-in-panel = 2;
     };
 
@@ -653,12 +648,12 @@ with lib.hm.gvariant;
       sort-order = "descending";
       type-format = "category";
       view-type = "list";
-      window-size = mkTuple [ 960 1048 ];
+      window-size = mkTuple [960 1048];
     };
 
     "org/gtk/settings/color-chooser" = {
-      custom-colors = [ (mkTuple [ 0.564706 0.933333 ]) (mkTuple [ 0.0 0.0 ]) (mkTuple [ 1.0 0.270588 ]) ];
-      selected-color = mkTuple [ true 1.0 ];
+      custom-colors = [(mkTuple [0.564706 0.933333]) (mkTuple [0.0 0.0]) (mkTuple [1.0 0.270588])];
+      selected-color = mkTuple [true 1.0];
     };
 
     "org/gtk/settings/file-chooser" = {
@@ -673,13 +668,12 @@ with lib.hm.gvariant;
       sort-directories-first = false;
       sort-order = "descending";
       type-format = "category";
-      window-position = mkTuple [ 26 23 ];
-      window-size = mkTuple [ 960 1001 ];
+      window-position = mkTuple [26 23];
+      window-size = mkTuple [960 1001];
     };
 
     "system/proxy" = {
       mode = "none";
     };
-
   };
 }

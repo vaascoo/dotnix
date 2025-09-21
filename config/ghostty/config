@@ -1,5 +1,5 @@
 font-family="JetBrainsMono Nerd Font Mono"
-theme=rose-pine
+theme = dark:rose-pine-moon,light:rose-pine-dawn
 font-size=14
 background-opacity=0.90
 keybind = alt+1=unbind
@@ -12,3 +12,13 @@ keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
 keybind = alt+0=unbind
+keybind = alt+shift+1=unbind
+keybind = alt+shift+2=unbind
+keybind = alt+shift+3=unbind
+keybind = alt+shift+4=unbind
+keybind = alt+shift+5=unbind
+keybind = alt+shift+6=unbind
+keybind = alt+shift+7=unbind
+keybind = alt+shift+8=unbind
+keybind = alt+shift+9=unbind
+keybind = alt+shift+0=unbind

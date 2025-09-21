@@ -46,6 +46,7 @@
     dconf
     foot
     gtk
+    lightdark
     proton
     ssh
   ]);

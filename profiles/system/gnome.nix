@@ -13,8 +13,6 @@
     appindicator
     dash-to-dock
     paperwm
-    tiling-assistant
-    tiling-shell
     tray-icons-reloaded
     vitals
   ];
@@ -22,12 +20,12 @@ in {
   environment.systemPackages = gnomeApps ++ extensions;
 
   programs.dconf.enable = true;
+  programs.xwayland.enable = true;
 
   services = {
     dbus.enable = true;
     libinput.enable = true;
     power-profiles-daemon.enable = true;
-    xserver.enable = true;
     xserver.desktopManager.gnome.enable = true;
     xserver.displayManager.gdm = {
       enable = true;

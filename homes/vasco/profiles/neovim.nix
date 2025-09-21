@@ -1,19 +1,29 @@
 {
   configDir,
   pkgs,
+  lib,
   ...
 }: let
-  nodePkgs = with pkgs.nodePackages; [
-    eslint
-    vscode-langservers-extracted
-    typescript-language-server
-    bash-language-server
-    typescript
-  ];
+  withPluginConfig = pluginList: let
+    addConfig = plugin: let
+      fileName = lib.toLower plugin.pname;
+      filePath = "${configDir}/nvim/lua/${fileName}.lua";
+      pluginConfig =
+        if builtins.pathExists filePath
+        then builtins.readFile filePath
+        else "";
+    in {
+      plugin = plugin;
+      type = "lua";
+      config = pluginConfig;
+    };
+  in
+    builtins.map addConfig pluginList;
+
   lsps = with pkgs; [
     ansible-language-server
     astro-language-server
-    clang-tools_15
+    clang-tools
     crystalline
     gopls
     java-language-server
@@ -24,38 +34,24 @@
     tailwindcss-language-server
     terraform-lsp
     tinymist
-    typst-fmt
-  ];
 
-  cmpPlugins = with pkgs.vimPlugins; [
-    lspkind-nvim
-    cmp-nvim-lsp
-    cmp-treesitter
-    cmp-buffer
-    cmp-path
-    cmp-cmdline
-    cmp-git
-    nvim-lspconfig
-    nvim-treesitter
-  ];
-
-  vibePlugins = with pkgs.vimPlugins; [
-    dressing-nvim
-    nui-nvim
-    render-markdown-nvim
+    nodePackages.bash-language-server
+    nodePackages.eslint
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
   ];
 in {
   home.packages = with pkgs;
     [
-      shellcheck
+      alejandra
       ansible-lint
-      typst
       go
-      gleam
-      erlang
+      shellcheck
+      typst
+      typst-fmt
     ]
-    ++ lsps
-    ++ nodePkgs;
+    ++ lsps;
 
   programs.neovim = {
     enable = true;
@@ -64,86 +60,32 @@ in {
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
-    plugins = with pkgs.vimPlugins;
-      [
-        nvim-lint
-        nvim-web-devicons
-        plenary-nvim
-        markdown-preview-nvim
-        vim-nix
-        rainbow-delimiters-nvim
-        luasnip
-        {
-          plugin = mini-icons;
-          type = "lua";
-          config = ''
-            require("mini.icons").setup()
-          '';
-        }
-        {
-          plugin = FTerm-nvim;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/term.lua";
-        }
-        # {
-        #   plugin = zellij-nav-nvim;
-        #   type = "lua";
-        #   config = builtins.readFile "${configDir}/nvim/lua/zellij.lua";
-        # }
-        {
-          plugin = Navigator-nvim;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/navigator.lua";
-        }
-        {
-          plugin = kanagawa-nvim;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/kanagawa.lua";
-        }
-        {
-          plugin = harpoon;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/harpoon.lua";
-        }
-        {
-          plugin = telescope-nvim;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/telescope.lua";
-        }
-        {
-          plugin = luasnip;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/luasnip.lua";
-        }
-        {
-          plugin = nvim-surround;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/surround.lua";
-        }
-        {
-          plugin = nvim-cmp;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/cmp.lua";
-        }
-        {
-          plugin = nvim-treesitter.withAllGrammars;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/treesitter.lua";
-        }
-        {
-          plugin = lualine-nvim;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/lualine.lua";
-        }
-        {
-          plugin = rose-pine;
-          type = "lua";
-          config = builtins.readFile "${configDir}/nvim/lua/colors.lua";
-        }
-      ]
-      ++ cmpPlugins ++ vibePlugins;
+    plugins = withPluginConfig (with pkgs.vimPlugins; [
+      lspkind-nvim
+      nvim-lspconfig
+      nvim-web-devicons
+      plenary-nvim
+      render-markdown-nvim
+      rainbow-delimiters-nvim
+      luasnip
+      nvim-lint
+      Navigator-nvim
+      telescope-nvim
+      luasnip
+      nvim-cmp
+      nvim-treesitter.withAllGrammars
+      lualine-nvim
+      rose-pine
 
-    extraLuaPackages = ps: with ps; [lua-lsp];
+      cmp-buffer
+      cmp-cmdline
+      cmp-git
+      cmp-nvim-lsp
+      cmp-path
+      cmp-treesitter
+    ]);
+
+    extraLuaPackages = ps: [ps.lua-lsp];
 
     extraLuaConfig = builtins.readFile "${configDir}/nvim/init.lua";
   };
