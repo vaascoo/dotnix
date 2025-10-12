@@ -4,7 +4,7 @@
   ...
 }: {
   nix = {
-    package = pkgs.unstable.nix;
+    package = pkgs.unstable.lixPackageSets.stable.lix;
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
       unstable.flake = inputs.unstable;

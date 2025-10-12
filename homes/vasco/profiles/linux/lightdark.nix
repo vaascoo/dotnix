@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   #TODO(vasco): this is very hardcoded; Make it more flexible
   toLight = pkgs.writeShellScript "to-light" ''
-    gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+    gsettings set org.gnome.desktop.interface color-scheme 'default'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
   '';
 

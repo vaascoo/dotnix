@@ -1,17 +1,18 @@
 {
   inputs,
-  configDir,
-  profilesDir,
-  modulesDir,
-  homesDir,
+  configDir ? ../config,
+  profilesDir ? ../profiles,
+  modulesDir ? ../modules,
+  homesDir ? ../homes,
   lib,
   ...
 }: let
+  inherit (inputs.agenix.nixosModules) age;
+  inherit (inputs.disko.nixosModules) disko;
   inherit (inputs.home.lib) homeManagerConfiguration;
   inherit (inputs.home.nixosModules) home-manager;
   inherit (inputs.impermanence.nixosModules) impermanence;
   inherit (inputs.lanzaboote.nixosModules) lanzaboote;
-  inherit (inputs.agenix.nixosModules) age;
 
   forEachSystem = fn: let
     systems = ["aarch64-darwin" "x86_64-linux"];
@@ -22,23 +23,34 @@
       })
       systems);
 
-  mkPkgs = pkgs: system: overlays:
-    import pkgs {
-      inherit overlays system;
-      config = {
-        allowUnfree = true;
-        hardware.enableAllFirmware = true;
-      };
-    };
+  exposePackages = {directory ? ../packages}:
+    forEachSystem (
+      system:
+        lib.filesystem.packagesFromDirectoryRecursive {
+          inherit (inputs.nixpkgs.legacyPackages."${system}".callPackage) callPackage;
+          inherit directory;
+        }
+    );
+
+  exposeFormatter = forEachSystem (system: inputs.nixpkgs.legacyPackages."${system}".alejandra);
+
+  mkPkgs = pkgs: overlays:
+    forEachSystem (system:
+      import pkgs {
+        inherit overlays system;
+        config.allowUnfree = true;
+        config.hardware.allowUnfree = true;
+      });
 
   importRecursive = dir: let
     entries = lib.filesystem.listFilesRecursive dir;
+    shouldIgnore = path: lib.hasPrefix "_" (lib.last (builtins.split "/" (builtins.toString path)));
   in
     if (builtins.pathExists dir)
     then
       builtins.map
       (entry: (import entry))
-      (builtins.filter (entry: lib.hasSuffix ".nix" entry) entries)
+      (builtins.filter (entry: (lib.hasSuffix ".nix" entry) && !(shouldIgnore entry)) entries)
     else [];
 
   mkProfiles = dir: let
@@ -69,20 +81,28 @@
       })
     withHome;
 
-  mkLinuxHost = hostDir: name: let
-    system = "x86_64-linux";
-    hostModules = importRecursive "${hostDir}/${name}";
-    commonModules = importRecursive "${modulesDir}";
-    profiles = mkProfiles "${profilesDir}";
-    pkgs = mkPkgs inputs.nixpkgs system (mkOverlays system);
-    homes = mkHomes "${homesDir}" pkgs;
+  mkLinux = hostDir: hostname: let
+    config = import "${hostDir}/${hostname}/_config.nix" {};
+    pkgs = (mkPkgs inputs.nixpkgs (mkOverlays config.system)).${config.system};
   in
     lib.nixosSystem {
-      inherit system pkgs;
-      specialArgs = {inherit configDir homesDir inputs profiles;};
-      modules =
-        [
-          {networking.hostName = name;}
+      inherit pkgs;
+      inherit (config) system;
+      specialArgs = {inherit configDir homesDir inputs;};
+      specialArgs.profiles = mkProfiles "${profilesDir}";
+      modules = lib.flatten [
+        {networking.hostName = hostname;}
+        (lib.optional
+          config.withAge
+          age)
+        (lib.optional
+          config.withDisko
+          disko)
+        (lib.optional
+          config.withHome
+          home-manager)
+        (lib.optional
+          config.withHome
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -90,27 +110,45 @@
               extraSpecialArgs = {
                 inherit configDir;
               };
-              users = homes;
+              users = mkHomes "${homesDir}" pkgs;
             };
-          }
-          home-manager
-          impermanence
-          age
-          lanzaboote
-        ]
-        ++ hostModules
-        ++ commonModules;
+          })
+        (lib.optional
+          config.withImpermanence
+          impermanence)
+        (lib.optional
+          config.withLanzaboote
+          lanzaboote)
+        (importRecursive "${hostDir}/${hostname}")
+        (importRecursive "${modulesDir}")
+      ];
     };
 
-  builder = hostDir: builder: let
+  map = {
+    directory,
+    fn,
+  }: let
     hostList = dirEntries: lib.attrsets.filterAttrs (_: value: value == "directory") dirEntries;
   in
-    lib.attrsets.mapAttrs (name: _: (builder hostDir name)) (hostList (builtins.readDir hostDir));
+    lib.attrsets.mapAttrs (name: _: (fn directory name)) (hostList (builtins.readDir directory));
 
   mkOverlays = system: [
     (final: prev: {
-      unstable = mkPkgs inputs.unstable system [];
-      latest = mkPkgs inputs.latest system [];
+      vasco = (exposePackages {}).${system};
+      unstable = (mkPkgs inputs.unstable []).${system};
+      latest = (mkPkgs inputs.latest []).${system};
+      final =
+        final
+        // {
+          inherit
+            (prev.lixPackageSets.stable)
+            colmena
+            nix-direnv
+            nix-eval-jobs
+            nix-fast-build
+            nixpkgs-review
+            ;
+        };
       inherit lib;
     })
     inputs.nur.overlays.default
@@ -134,5 +172,17 @@
         extraSpecialArgs = {inherit configDir inputs profiles;};
       });
 in {
-  inherit forEachSystem builder importRecursive mkLinuxHost mkPkgs mkProfiles mkHomeManager mkHomes;
+  inherit
+    map
+    forEachSystem
+    importRecursive
+    mkHomeManager
+    mkHomes
+    mkLinux
+    mkOverlays
+    mkPkgs
+    mkProfiles
+    exposePackages
+    exposeFormatter
+    ;
 }

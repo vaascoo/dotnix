@@ -5,7 +5,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     agenix
-    distrobox
+    killall
     dnsutils
     docker-compose
     file

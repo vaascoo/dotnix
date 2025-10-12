@@ -19,6 +19,7 @@
   ];
   commonProfiles = with profiles; [
     direnv
+    emacs
     fish
     fzf
     git
@@ -30,14 +31,15 @@
   ];
 
   linuxPackages = lib.optional isLinux (with pkgs; [
-    brave
     calibre
+    discord
     evince
     feh
     helvum
     neofetch
     pavucontrol
     qalculate-gtk
+    stremio
     thunderbird
     waypipe
     wl-clipboard

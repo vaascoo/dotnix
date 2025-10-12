@@ -11,9 +11,8 @@
 
   extensions = with pkgs.gnomeExtensions; [
     appindicator
-    dash-to-dock
-    paperwm
-    tray-icons-reloaded
+    blur-my-shell
+    tiling-assistant
     vitals
   ];
 in {
