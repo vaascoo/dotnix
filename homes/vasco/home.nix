@@ -15,6 +15,7 @@
     git-ignore
     htop
     lazygit
+    jujutsu
     spotify
   ];
   commonProfiles = with profiles; [
@@ -50,6 +51,7 @@
     gtk
     lightdark
     proton
+    spotify
     ssh
   ]);
 

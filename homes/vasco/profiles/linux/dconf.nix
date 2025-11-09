@@ -8,8 +8,8 @@ with lib.hm.gvariant;
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///home/vasco/.config/nix/config/wallpapers/newyork.jpg";
-      picture-uri-dark = "file:///home/vasco/.config/nix/config/wallpapers/newyork.jpg";
+      picture-uri = "file:///home/vasco/.config/nix/config/wallpapers/genoa.jpg";
+      picture-uri-dark = "file:///home/vasco/.config/nix/config/wallpapers/genoa.jpg";
       primary-color = "#000000000000";
       secondary-color = "#000000000000";
     };
@@ -119,6 +119,7 @@ with lib.hm.gvariant;
       switch-to-workspace-right = [];
       toggle-fullscreen = [ "<Super><Shift>f" ];
       unmaximize = [];
+      switch-input-source = [ "<Control>space" ];
     };
 
     "org/gnome/desktop/wm/preferences" = {

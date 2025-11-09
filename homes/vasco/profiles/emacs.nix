@@ -3,7 +3,7 @@
     enable = true;
     package =
       (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages
-      (epkgs: with epkgs; [vterm org-roam]);
+      (epkgs: with epkgs; [vterm]);
   };
 
   home.packages = with pkgs; [

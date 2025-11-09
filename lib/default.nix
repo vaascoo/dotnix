@@ -13,6 +13,8 @@
   inherit (inputs.home.nixosModules) home-manager;
   inherit (inputs.impermanence.nixosModules) impermanence;
   inherit (inputs.lanzaboote.nixosModules) lanzaboote;
+  inherit (inputs.spicetify.nixosModules) spicetify;
+  golinkModule = inputs.golink.nixosModules.default;
 
   forEachSystem = fn: let
     systems = ["aarch64-darwin" "x86_64-linux"];
@@ -92,6 +94,8 @@
       specialArgs.profiles = mkProfiles "${profilesDir}";
       modules = lib.flatten [
         {networking.hostName = hostname;}
+        golinkModule 
+        spicetify
         (lib.optional
           config.withAge
           age)

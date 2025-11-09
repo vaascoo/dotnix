@@ -1,13 +1,10 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }: {
   i18n.defaultLocale = "en_US.UTF-8";
+  services.xserver.xkb.layout = "us";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "pt-latin1";
+    useXkbConfig = true;
   };
-  services.xserver.xkb.layout = lib.mkIf config.services.xserver.enable "pt";
 }

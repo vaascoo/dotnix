@@ -8,7 +8,6 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 cmp.setup({
-
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -21,7 +20,6 @@ cmp.setup({
   },
 
   formatting = {
-
     format = lspkind.cmp_format({
       mode = 'symbol_text', -- show only symbol annotations
       maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
@@ -37,16 +35,9 @@ cmp.setup({
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-    ["<C-j>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+    ["<C-P>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+    ["<C-N>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-leader>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable,
-    ["<C-e>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
     ["<CR>"] = cmp.mapping.confirm { select = false },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -79,8 +70,6 @@ cmp.setup({
     { name = 'luasnip' },
     -- current buffer
     { name = 'buffer' },
-    -- orgmode
-    { name = 'orgmode' },
     -- paths
     { name = 'path' },
   })
@@ -95,6 +84,8 @@ cmp.setup.filetype('gitcommit', {
   })
 })
 
+require"cmp_git".setup()
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   sources = {
@@ -102,14 +93,6 @@ cmp.setup.cmdline('/', {
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float)
@@ -128,9 +111,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wl', function()
+    vim.keymap.set('n', '<C-w>a', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<C-w>r', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<C-w>l', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
@@ -215,7 +198,7 @@ require('lspconfig')['nil_ls'].setup {
         command = { "alejandra", "--quiet" },
       },
       nix = {
-        maxMemoryMB = 4096,
+        maxMemoryMB = 8192,
         flake = {
           autoEvalInputs = true,
         },

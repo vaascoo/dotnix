@@ -13,14 +13,14 @@ in {
   systemd.user.timers.toggle-light-mode = {
     Unit.Description = "Timer to switch to light mode";
     # DayOfWeek Year-Month-Day Hour:Minute:Second
-    Timer.OnCalendar = "08:00:00";
+    Timer.OnCalendar = "07:00:00";
     Timer.Persistent = true;
     Install.WantedBy = [ "timers.target" ];
   };
 
   systemd.user.timers.toggle-dark-mode = {
     Unit.Description = "Timer to switch to dark mode";
-    Timer.OnCalendar = "20:00:00";
+    Timer.OnCalendar = "18:30:00";
     Timer.Persistent = true;
     Install.WantedBy = [ "timers.target" ];
   };

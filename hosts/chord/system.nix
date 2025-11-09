@@ -11,6 +11,7 @@
     fonts
     gc
     gnome
+    golink
     hwAccel
     keymap
     pipewire

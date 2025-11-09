@@ -43,11 +43,6 @@
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   time.timeZone = "Europe/Lisbon";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "pt-latin1";
-  };
 
   users.mutableUsers = false;
   users.users = {

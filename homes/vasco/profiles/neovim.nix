@@ -68,14 +68,20 @@ in {
       render-markdown-nvim
       rainbow-delimiters-nvim
       luasnip
+      lsp_lines-nvim
       nvim-lint
       Navigator-nvim
       telescope-nvim
       luasnip
+      noice-nvim
       nvim-cmp
-      nvim-treesitter.withAllGrammars
+      pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars
+      nvim-treesitter-context
+      nvim-treesitter-refactor
+      nvim-notify
+      dashboard-nvim
       lualine-nvim
-      rose-pine
+      ayu-vim
 
       cmp-buffer
       cmp-cmdline
