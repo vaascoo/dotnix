@@ -81,7 +81,7 @@ in {
       nvim-notify
       dashboard-nvim
       lualine-nvim
-      ayu-vim
+      tokyonight-nvim
 
       cmp-buffer
       cmp-cmdline

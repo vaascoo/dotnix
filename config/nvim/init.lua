@@ -68,15 +68,15 @@ vim.keymap.set('n', '<leader>wK', '<C-w>K', vim.tbl_extend("force", opts, { desc
 vim.keymap.set('n', '<leader>wL', '<C-w>L', vim.tbl_extend("force", opts, { desc = "Window: move to right edge" }))
 
 -- Equalize / rotate / close / only
-vim.keymap.set('n', '<leader>w=', '<C-w>+', vim.tbl_extend("force", opts, { desc = "Window: equalize sizes" }))
+vim.keymap.set('n', '<leader>w+', '<C-w>=', vim.tbl_extend("force", opts, { desc = "Window: equalize sizes" }))
 vim.keymap.set('n', '<leader>wr', '<cmd>wincmd r<CR>', vim.tbl_extend("force", opts, { desc = "Window: rotate" }))
 vim.keymap.set('n', '<leader>wd', '<cmd>close<CR>', vim.tbl_extend("force", opts, { desc = "Window: close" }))
 vim.keymap.set('n', '<leader>wo', '<cmd>only<CR>', vim.tbl_extend("force", opts, { desc = "Window: only" }))
 vim.keymap.set('n', '<leader>wt', '<cmd>tab split<CR>', vim.tbl_extend("force", opts, { desc = "Window: open in new tab" }))
 
 -- Resizing: vertical
-vim.keymap.set('n', '<leader>w<', '<cmd>vertical resize -5<CR>', vim.tbl_extend("force", opts, { desc = "Window: shrink vertical" }))
-vim.keymap.set('n', '<leader>w>', '<cmd>vertical resize +5<CR>', vim.tbl_extend("force", opts, { desc = "Window: widen vertical" }))
+vim.keymap.set('n', '<leader>w,', '<cmd>vertical resize -5<CR>', vim.tbl_extend("force", opts, { desc = "Window: shrink vertical" }))
+vim.keymap.set('n', '<leader>w.', '<cmd>vertical resize +5<CR>', vim.tbl_extend("force", opts, { desc = "Window: widen vertical" }))
 -- Resizing: height
 
 vim.keymap.set('n', '<leader>w-', '<cmd>resize -2<CR>', vim.tbl_extend("force", opts, { desc = "Window: decrease height" }))
