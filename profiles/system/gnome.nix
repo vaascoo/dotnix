@@ -25,8 +25,8 @@ in {
     dbus.enable = true;
     libinput.enable = true;
     power-profiles-daemon.enable = true;
-    xserver.desktopManager.gnome.enable = true;
-    xserver.displayManager.gdm = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm = {
       enable = true;
       autoSuspend = false;
       wayland = true;

@@ -18,7 +18,6 @@
     nixpkgs-fmt
     nmap
     pciutils
-    prismlauncher
     ripgrep
     sysstat
     tmux

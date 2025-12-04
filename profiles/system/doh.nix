@@ -8,6 +8,7 @@
     dnsutils
     dogdns
   ];
+
   networking.networkmanager = lib.mkIf config.networking.networkmanager.enable {
     dns = "none";
   };
@@ -16,7 +17,7 @@
     "127.0.0.1"
   ];
 
-  services.dnscrypt-proxy2 = {
+  services.dnscrypt-proxy = {
     enable = true;
     settings = {
       sources.public-resolvers = {

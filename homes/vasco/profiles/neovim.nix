@@ -21,7 +21,6 @@
     builtins.map addConfig pluginList;
 
   lsps = with pkgs; [
-    ansible-language-server
     astro-language-server
     clang-tools
     crystalline
@@ -30,7 +29,7 @@
     nil
     pyright
     rust-analyzer
-    sumneko-lua-language-server
+    lua-language-server
     tailwindcss-language-server
     terraform-lsp
     tinymist
@@ -45,11 +44,10 @@ in {
   home.packages = with pkgs;
     [
       alejandra
-      ansible-lint
       go
       shellcheck
       typst
-      typst-fmt
+      typstyle
     ]
     ++ lsps;
 

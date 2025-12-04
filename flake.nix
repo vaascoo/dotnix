@@ -6,13 +6,12 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     golink.url = "github:tailscale/golink";
     golink.inputs.nixpkgs.follows = "unstable";
-    home.url = "github:nix-community/home-manager/release-25.05";
+    home.url = "github:nix-community/home-manager/release-25.11";
     home.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence/master";
-    lanzaboote.url = "github:nix-community/lanzaboote?ref=v0.4.2";
-    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+    lanzaboote.url = "github:nix-community/lanzaboote?ref=v0.4.3";
     latest.url = "github:NixOS/nixpkgs/master";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nur.url = "github:nix-community/NUR";
     spicetify.url = "github:Gerg-L/spicetify-nix";
     spicetify.inputs.nixpkgs.follows = "nixpkgs";

@@ -1,17 +1,24 @@
 {...}: {
   programs.git = {
     enable = true;
-    userEmail = "vcvasco1@gmail.com";
-    userName = "vaascoo";
-    extraConfig = {
+    settings = {
       color.ui = true;
-      pull.rebase = true;
-      init.defaultBranch = "main";
-      url."git@github.com".pushinsteadOf = "https://github.com";
+
+      commit = {
+        gpgsign = "true";
+        sign = "true";
+      };
+
       gpg.format = "ssh";
-      commit.sign = "true";
-      commit.gpgsign = "true";
-      user.signingkey = "~/.ssh/id_ed25519_sign.pub";
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      url."git@github.com".pushinsteadOf = "https://github.com";
+
+      user = {
+        email = "vcvasco1@gmail.com";
+        name = "vaascoo";
+        signingkey = "~/.ssh/id_ed25519_sign.pub";
+      };
     };
   };
 }

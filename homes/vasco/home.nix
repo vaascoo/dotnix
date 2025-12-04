@@ -38,9 +38,9 @@
     feh
     helvum
     neofetch
+    openssh
     pavucontrol
     qalculate-gtk
-    stremio
     thunderbird
     waypipe
     wl-clipboard
@@ -52,7 +52,6 @@
     lightdark
     proton
     spotify
-    ssh
   ]);
 
   darwinPackages = lib.optional isDarwin [];

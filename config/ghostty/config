@@ -1,5 +1,5 @@
 font-family="JetBrainsMono Nerd Font Mono"
-theme = dark:tokyonight,light:tokyonight-day
+theme = dark:TokyoNight Night,light:TokyoNight Day
 font-size=14
 keybind = alt+1=unbind
 keybind = alt+2=unbind
@@ -21,3 +21,5 @@ keybind = alt+shift+7=unbind
 keybind = alt+shift+8=unbind
 keybind = alt+shift+9=unbind
 keybind = alt+shift+0=unbind
+keybind = ctrl+shift+n=unbind
+keybind = ctrl+shift+p=unbind

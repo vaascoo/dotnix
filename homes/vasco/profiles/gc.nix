@@ -2,7 +2,7 @@
   gcOptions = {
     automatic = true;
     options = "-d";
-    frequency = "weekly";
+    dates = "weekly";
     randomizedDelaySec = "4h";
   };
 in {
