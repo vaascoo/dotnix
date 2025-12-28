@@ -103,7 +103,6 @@
       specialArgs.hostConfig = config;
       modules = lib.flatten [
         golinkModule
-        spicetify
         {networking.hostName = hostname;}
         (importRecursive "${hostDir}/${hostname}")
         (importRecursive "${modulesDir}")

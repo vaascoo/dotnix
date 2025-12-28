@@ -53,7 +53,6 @@
     gtk
     lightdark
     proton
-    spotify
     vicinae
   ]);
 

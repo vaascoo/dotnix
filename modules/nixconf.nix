@@ -9,7 +9,6 @@
       nixpkgs.flake = inputs.nixpkgs;
       unstable.flake = inputs.unstable;
       home.flake = inputs.home;
-      nur.flake = inputs.nur;
     };
     nixPath = [
       "nixpkgs=/etc/channels/nixpkgs"
