@@ -2,7 +2,7 @@
   profiles,
   ...
 }: {
-  imports = with profiles.system; [
+  imports = with profiles; [
     base
     laptop
     golink
