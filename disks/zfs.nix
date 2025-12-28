@@ -10,7 +10,7 @@
       type = "filesystem";
       format = "vfat";
       mountpoint = "/boot";
-      mountOptions = ["umask=0077"];
+      mountOptions = ["nofail"];
     };
   };
 
@@ -32,10 +32,7 @@
       mountpoint = "none";
       normalization = "formD";
     };
-    options = {
-      ashift = "12";
-      atime = "off";
-    };
+    options.ashift = "12";
 
     datasets = {
       "reserved" = {
@@ -53,17 +50,17 @@
 
       "enc/root" = {
         type = "zfs_fs";
-        options.mountpoint = "/";
+        mountpoint = "/";
       };
 
       "enc/nix" = {
         type = "zfs_fs";
-        options.mountpoint = "/nix";
+        mountpoint = "/nix";
       };
 
       "enc/home" = {
         type = "zfs_fs";
-        options.mountpoint = "/home";
+        mountpoint = "/home";
       };
     };
   };

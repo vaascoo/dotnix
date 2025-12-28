@@ -14,14 +14,19 @@
 }
 // (
   if hostConfig.impermanence.enable
-  then {
-    systemd.shutdownRamfs.contents."/etc/systemd/system-shutdown/zpool".source = let
-      zfsPackage = config.boot.zfs.package;
-    in
-      pkgs.lib.mkForce (pkgs.writeShellScript "zpool" ''
+  then let
+    zfsPackage = config.boot.zfs.package;
+  in {
+    systemd.shutdownRamfs = {
+      contents."/etc/systemd/system-shutdown/zpool".source = pkgs.lib.mkForce (pkgs.writeShellScript "zpool" ''
         ${zfsPackage}/bin/zfs rollback -r zroot/root@blank
         exec ${zfsPackage}/bin/zpool sync
       '');
+      storePaths = [
+        "${zfsPackage}/bin/zfs"
+      ];
+    };
+
     environment.persistence."/nix/persist" = {
       hideMounts = true;
       directories = [
@@ -31,8 +36,8 @@
         "/var/lib"
         "/var/log"
       ];
+      files = ["/etc/machine-id"];
     };
-    environment.etc."machine-id".source = "/nix/persist/etc/machine-id";
   }
   else {}
 )
