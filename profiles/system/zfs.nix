@@ -1,10 +1,14 @@
-{pkgs, config, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   zfsPackage = config.boot.zfs.package;
 in {
   boot.zfs.allowHibernation = true;
   boot.zfs.forceImportRoot = false;
   boot.initrd.availableKernelModules = ["zfs"];
-  boot.kernelModules = [ "zfs" ];
+  boot.kernelModules = ["zfs"];
   boot.supportedFilesystems = ["zfs"];
   services.zfs.autoScrub.enable = true;
 

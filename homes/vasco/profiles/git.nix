@@ -30,8 +30,7 @@
   home.file.".config/git/allowed_signers" = {
     enable = true;
     text = ''
-    # empty
+      # empty
     '';
   };
-
 }

@@ -1,7 +1,4 @@
-{
-  profiles,
-  ...
-}: {
+{profiles, ...}: {
   imports = with profiles.system; [
     age
     common

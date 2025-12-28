@@ -1,9 +1,6 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, ... }:
-
-with lib.hm.gvariant;
-
-{
+{lib, ...}:
+with lib.hm.gvariant; {
   dconf.settings = {
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
@@ -15,8 +12,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/input-sources" = {
-      sources = [ (mkTuple [ "xkb" "pt" ]) (mkTuple [ "xkb" "us" ]) ];
-      xkb-options = [ "grp:caps_toggle" ];
+      sources = [(mkTuple ["xkb" "pt"]) (mkTuple ["xkb" "us"])];
+      xkb-options = ["grp:caps_toggle"];
     };
 
     "org/gnome/desktop/interface" = {
@@ -63,7 +60,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/search-providers" = {
-      sort-order = [ "org.gnome.Settings.desktop" "org.gnome.Nautilus.desktop" ];
+      sort-order = ["org.gnome.Settings.desktop" "org.gnome.Nautilus.desktop"];
     };
 
     "org/gnome/desktop/session" = {
@@ -76,23 +73,23 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Shift><Super>q" ];
+      close = ["<Shift><Super>q"];
       maximize = [];
       minimize = [];
       move-to-monitor-down = [];
       move-to-monitor-left = [];
       move-to-monitor-right = [];
       move-to-monitor-up = [];
-      move-to-workspace-1 = [ "<Super><Shift>1" ];
-      move-to-workspace-10 = [ "<Super><Shift>0" ];
-      move-to-workspace-2 = [ "<Super><Shift>2" ];
-      move-to-workspace-3 = [ "<Super><Shift>3" ];
-      move-to-workspace-4 = [ "<Super><Shift>4" ];
-      move-to-workspace-5 = [ "<Super><Shift>5" ];
-      move-to-workspace-6 = [ "<Super><Shift>6" ];
-      move-to-workspace-7 = [ "<Super><Shift>7" ];
-      move-to-workspace-8 = [ "<Super><Shift>8" ];
-      move-to-workspace-9 = [ "<Super><Shift>9" ];
+      move-to-workspace-1 = ["<Super><Shift>1"];
+      move-to-workspace-10 = ["<Super><Shift>0"];
+      move-to-workspace-2 = ["<Super><Shift>2"];
+      move-to-workspace-3 = ["<Super><Shift>3"];
+      move-to-workspace-4 = ["<Super><Shift>4"];
+      move-to-workspace-5 = ["<Super><Shift>5"];
+      move-to-workspace-6 = ["<Super><Shift>6"];
+      move-to-workspace-7 = ["<Super><Shift>7"];
+      move-to-workspace-8 = ["<Super><Shift>8"];
+      move-to-workspace-9 = ["<Super><Shift>9"];
       move-to-workspace-down = [];
       move-to-workspace-last = [];
       move-to-workspace-left = [];
@@ -104,22 +101,22 @@ with lib.hm.gvariant;
       switch-group-backward = [];
       switch-panels = [];
       switch-panels-backward = [];
-      switch-to-workspace-1 = [ "<Super>1" ];
-      switch-to-workspace-10 = [ "<Super>0" ];
-      switch-to-workspace-2 = [ "<Super>2" ];
-      switch-to-workspace-3 = [ "<Super>3" ];
-      switch-to-workspace-4 = [ "<Super>4" ];
-      switch-to-workspace-5 = [ "<Super>5" ];
-      switch-to-workspace-6 = [ "<Super>6" ];
-      switch-to-workspace-7 = [ "<Super>7" ];
-      switch-to-workspace-8 = [ "<Super>8" ];
-      switch-to-workspace-9 = [ "<Super>9" ];
+      switch-to-workspace-1 = ["<Super>1"];
+      switch-to-workspace-10 = ["<Super>0"];
+      switch-to-workspace-2 = ["<Super>2"];
+      switch-to-workspace-3 = ["<Super>3"];
+      switch-to-workspace-4 = ["<Super>4"];
+      switch-to-workspace-5 = ["<Super>5"];
+      switch-to-workspace-6 = ["<Super>6"];
+      switch-to-workspace-7 = ["<Super>7"];
+      switch-to-workspace-8 = ["<Super>8"];
+      switch-to-workspace-9 = ["<Super>9"];
       switch-to-workspace-last = [];
       switch-to-workspace-left = [];
       switch-to-workspace-right = [];
-      toggle-fullscreen = [ "<Super><Shift>f" ];
+      toggle-fullscreen = ["<Super><Shift>f"];
       unmaximize = [];
-      switch-input-source = [ "gpr:caps_toggle" ];
+      switch-input-source = ["gpr:caps_toggle"];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -138,7 +135,7 @@ with lib.hm.gvariant;
       sidebar-page = "thumbnails";
       sidebar-size = 132;
       sizing-mode = "free";
-      window-ratio = mkTuple [ 1.481481 1.387626 ];
+      window-ratio = mkTuple [1.481481 1.387626];
       zoom = 0.852153;
     };
 
@@ -187,16 +184,16 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" ];
+      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"];
       help = [];
-      logout = [ "<Shift><Super>e" ];
-      next = [ "XF86HangupPhone" ];
-      next-static = [ "XF86AudioNext" "<Ctrl>XF86AudioNext" "XF86HangupPhone" ];
-      play = [ "XF86NotificationCenter" ];
-      previous = [ "XF86PickupPhone" ];
-      previous-static = [ "XF86AudioPrev" "<Ctrl>XF86AudioPrev" "XF86PickupPhone" ];
+      logout = ["<Shift><Super>e"];
+      next = ["XF86HangupPhone"];
+      next-static = ["XF86AudioNext" "<Ctrl>XF86AudioNext" "XF86HangupPhone"];
+      play = ["XF86NotificationCenter"];
+      previous = ["XF86PickupPhone"];
+      previous-static = ["XF86AudioPrev" "<Ctrl>XF86AudioPrev" "XF86PickupPhone"];
       rotate-video-lock-static = [];
-      screensaver = [ "<Super>q" ];
+      screensaver = ["<Super>q"];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -224,13 +221,13 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      command-history = [ "lg" ];
+      command-history = ["lg"];
       disable-user-extensions = false;
       disabled-extensions = [];
-      enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" "Vitals@CoreCoding.com" "blur-my-shell@aunetx" "tiling-assistant@leleat-on-github" ];
+      enabled-extensions = ["appindicatorsupport@rgcjonas.gmail.com" "Vitals@CoreCoding.com" "blur-my-shell@aunetx" "tiling-assistant@leleat-on-github"];
       favorite-apps = [];
       last-selected-power-profile = "power-saver";
-      looking-glass-history = [ "exit" "quit()" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'on'" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'off'" ];
+      looking-glass-history = ["exit" "quit()" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'on'" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'off'"];
       remember-mount-password = false;
       welcome-dialog-last-shown-version = "43.2";
     };
@@ -250,14 +247,14 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/paperwm/keybindings" = {
-      move-space-monitor-above = [ "<Control><Super>k" ];
-      move-space-monitor-below = [ "<Control><Super>j" ];
-      move-space-monitor-left = [ "<Control><Super>h" ];
-      move-space-monitor-right = [ "<Control><Super>l" ];
-      switch-monitor-above = [ "<Control><Alt>k" ];
-      switch-monitor-below = [ "<Control><Alt>j" ];
-      switch-monitor-left = [ "<Control><Alt>h" ];
-      switch-monitor-right = [ "<Control><Alt>l" ];
+      move-space-monitor-above = ["<Control><Super>k"];
+      move-space-monitor-below = ["<Control><Super>j"];
+      move-space-monitor-left = ["<Control><Super>h"];
+      move-space-monitor-right = ["<Control><Super>l"];
+      switch-monitor-above = ["<Control><Alt>k"];
+      switch-monitor-below = ["<Control><Alt>j"];
+      switch-monitor-left = ["<Control><Alt>h"];
+      switch-monitor-right = ["<Control><Alt>l"];
     };
 
     "org/gnome/shell/extensions/tiling-assistant" = {
@@ -279,25 +276,25 @@ with lib.hm.gvariant;
       restore-window = [];
       search-popup-layout = [];
       single-screen-gap = 4;
-      tile-bottom-half = [ "<Shift><Super>j" ];
+      tile-bottom-half = ["<Shift><Super>j"];
       tile-bottom-half-ignore-ta = [];
-      tile-bottomleft-quarter = [ "<Shift><Super>b" ];
+      tile-bottomleft-quarter = ["<Shift><Super>b"];
       tile-bottomleft-quarter-ignore-ta = [];
-      tile-bottomright-quarter = [ "<Shift><Super>m" ];
+      tile-bottomright-quarter = ["<Shift><Super>m"];
       tile-bottomright-quarter-ignore-ta = [];
       tile-edit-mode = [];
-      tile-left-half = [ "<Shift><Super>h" ];
+      tile-left-half = ["<Shift><Super>h"];
       tile-left-half-ignore-ta = [];
-      tile-maximize = [ "<Super>f" ];
+      tile-maximize = ["<Super>f"];
       tile-maximize-horizontally = [];
       tile-maximize-vertically = [];
-      tile-right-half = [ "<Shift><Super>l" ];
+      tile-right-half = ["<Shift><Super>l"];
       tile-right-half-ignore-ta = [];
-      tile-top-half = [ "<Shift><Super>k" ];
+      tile-top-half = ["<Shift><Super>k"];
       tile-top-half-ignore-ta = [];
-      tile-topleft-quarter = [ "<Shift><Super>y" ];
+      tile-topleft-quarter = ["<Shift><Super>y"];
       tile-topleft-quarter-ignore-ta = [];
-      tile-topright-quarter = [ "<Shift><Super>p" ];
+      tile-topright-quarter = ["<Shift><Super>p"];
       tile-topright-quarter-ignore-ta = [];
       toggle-always-on-top = [];
       toggle-tiling-popup = [];
@@ -305,7 +302,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/vitals" = {
-      hot-sensors = [ "_memory_usage_" "__network-rx_max__" "__temperature_max__" ];
+      hot-sensors = ["_memory_usage_" "__network-rx_max__" "__temperature_max__"];
       position-in-panel = 2;
       show-battery = true;
       use-higher-precision = false;
@@ -358,12 +355,12 @@ with lib.hm.gvariant;
       sort-order = "descending";
       type-format = "category";
       view-type = "list";
-      window-size = mkTuple [ 960 1048 ];
+      window-size = mkTuple [960 1048];
     };
 
     "org/gtk/settings/color-chooser" = {
-      custom-colors = [ (mkTuple [ 0.564706 0.933333 ]) (mkTuple [ 0.0 0.0 ]) (mkTuple [ 1.0 0.270588 ]) ];
-      selected-color = mkTuple [ true 1.0 ];
+      custom-colors = [(mkTuple [0.564706 0.933333]) (mkTuple [0.0 0.0]) (mkTuple [1.0 0.270588])];
+      selected-color = mkTuple [true 1.0];
     };
 
     "org/gtk/settings/file-chooser" = {
@@ -378,13 +375,12 @@ with lib.hm.gvariant;
       sort-directories-first = false;
       sort-order = "descending";
       type-format = "category";
-      window-position = mkTuple [ 26 23 ];
-      window-size = mkTuple [ 960 1001 ];
+      window-position = mkTuple [26 23];
+      window-size = mkTuple [960 1001];
     };
 
     "system/proxy" = {
       mode = "none";
     };
-
   };
 }
