@@ -117,6 +117,7 @@ vim.lsp.enable({
   'terraform_lsp',
   'tinymist',
   'ts_ls',
+  'zls',
 }, true)
 
 vim.lsp.config('lua_ls', {
@@ -159,4 +160,14 @@ vim.lsp.config('nil_ls', {
 vim.lsp.config('tinymist', {
   settings = { exportPdf = 'onSave' },
   filetypes = { 'typst', 'typ' },
+})
+
+vim.lsp.config('rust_analyzer', {
+  settings = {
+    ['rust-analyzer'] = {
+      files = {
+        exclude = { '.direnv', 'target' }
+      }
+    }
+  }
 })

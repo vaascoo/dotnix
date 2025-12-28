@@ -3,11 +3,19 @@
   toLight = pkgs.writeShellScript "to-light" ''
     gsettings set org.gnome.desktop.interface color-scheme 'default'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+
+    rm -f ~/.config/vicinae
+    ln -sf ~/.config/vicinae-light ~/.config/vicinae
+    systemctl --user restart vicinae-server
   '';
 
   toDark = pkgs.writeShellScript "to-dark" ''
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
+    rm -f ~/.config/vicinae
+    ln -sf ~/.config/vicinae-dark ~/.config/vicinae
+    systemctl --user restart vicinae-server
   '';
 in {
   systemd.user.timers.toggle-light-mode = {

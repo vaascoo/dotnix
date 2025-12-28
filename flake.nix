@@ -37,5 +37,6 @@
       directory = ./hosts;
       fn = lib.vasco.mkLinux;
     };
+    diskoConfigurations = lib.vasco.exposeDisks;
   };
 }

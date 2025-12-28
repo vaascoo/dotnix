@@ -29,12 +29,14 @@
     forEachSystem (
       system:
         lib.filesystem.packagesFromDirectoryRecursive {
-          inherit (inputs.nixpkgs.legacyPackages."${system}".callPackage) callPackage;
+          inherit (inputs.nixpkgs.legacyPackages."${system}") callPackage;
           inherit directory;
         }
     );
 
   exposeFormatter = forEachSystem (system: inputs.nixpkgs.legacyPackages."${system}".alejandra);
+
+  exposeDisks = import ../disks/default.nix {};
 
   mkPkgs = pkgs: overlays:
     forEachSystem (system:
@@ -84,7 +86,14 @@
     withHome;
 
   mkLinux = hostDir: hostname: let
-    config = import "${hostDir}/${hostname}/_config.nix" {};
+    defaultConfig = {
+      age.enable = false;
+      disko.enable = false;
+      home.enable = false;
+      impermanence.enable = false;
+      secureboot.enable = false;
+    };
+    config = defaultConfig // import "${hostDir}/${hostname}/_config.nix" {};
     pkgs = (mkPkgs inputs.nixpkgs (mkOverlays config.system)).${config.system};
   in
     lib.nixosSystem {
@@ -93,20 +102,20 @@
       specialArgs = {inherit configDir homesDir inputs;};
       specialArgs.profiles = mkProfiles "${profilesDir}";
       modules = lib.flatten [
-        {networking.hostName = hostname;}
-        golinkModule 
+        golinkModule
         spicetify
-        (lib.optional
-          config.withAge
-          age)
-        (lib.optional
-          config.withDisko
-          disko)
-        (lib.optional
-          config.withHome
-          home-manager)
-        (lib.optional
-          config.withHome
+        {networking.hostName = hostname;}
+        (importRecursive "${hostDir}/${hostname}")
+        (importRecursive "${modulesDir}")
+        (lib.optional config.impermanence.enable impermanence)
+        (lib.optional config.secureboot.enable lanzaboote)
+        (lib.optional config.age.enable age)
+        (lib.optionals config.disko.enable [
+          disko
+          (builtins.getAttr config.disko.config exposeDisks)
+        ])
+        (lib.optionals config.home.enable [
+          home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -116,15 +125,8 @@
               };
               users = mkHomes "${homesDir}" pkgs;
             };
-          })
-        (lib.optional
-          config.withImpermanence
-          impermanence)
-        (lib.optional
-          config.withLanzaboote
-          lanzaboote)
-        (importRecursive "${hostDir}/${hostname}")
-        (importRecursive "${modulesDir}")
+          }
+        ])
       ];
     };
 
@@ -186,6 +188,7 @@ in {
     mkOverlays
     mkPkgs
     mkProfiles
+    exposeDisks
     exposePackages
     exposeFormatter
     ;

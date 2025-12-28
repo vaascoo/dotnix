@@ -25,8 +25,6 @@
     unzip
     unzip
     usbutils
-    virtiofsd
-    virt-manager
     wget
     wireguard-tools
     zip
@@ -48,7 +46,7 @@
     vasco = {
       isNormalUser = true;
       description = "Vasco Correia";
-      extraGroups = ["audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout" "fuse"];
+      extraGroups = ["wheel" "networkmanager"];
       initialHashedPassword = "$6$DzeNGzM3T9/NALiy$iHZ.pTMGbqhdMzcpwTuZ8dM6zGGoH.7M/m5GBAK5v3tdg2rpYcnSq8k3VlEwsvbOjv/fcK2BR7E8yt69nE9BR/";
       shell = pkgs.zsh;
     };

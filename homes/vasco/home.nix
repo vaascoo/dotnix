@@ -11,6 +11,7 @@
     diff-so-fancy
     dogdns
     firefox
+    ungoogled-chromium
     gh
     git-ignore
     htop
@@ -33,10 +34,10 @@
 
   linuxPackages = lib.optional isLinux (with pkgs; [
     calibre
-    discord
     evince
     feh
     helvum
+    libreoffice
     neofetch
     openssh
     pavucontrol
@@ -44,6 +45,7 @@
     thunderbird
     waypipe
     wl-clipboard
+    vscode-fhs
   ]);
   linuxProfiles = lib.optional isLinux (with profiles.linux; [
     dconf
@@ -52,6 +54,7 @@
     lightdark
     proton
     spotify
+    vicinae
   ]);
 
   darwinPackages = lib.optional isDarwin [];

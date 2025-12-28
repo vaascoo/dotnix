@@ -33,6 +33,7 @@
     tailwindcss-language-server
     terraform-lsp
     tinymist
+    zls
 
     nodePackages.bash-language-server
     nodePackages.eslint
@@ -44,10 +45,15 @@ in {
   home.packages = with pkgs;
     [
       alejandra
+      cargo
       go
+      rustc
+      rustfmt
+      lldb
       shellcheck
       typst
       typstyle
+      zig
     ]
     ++ lsps;
 
@@ -77,7 +83,6 @@ in {
       nvim-treesitter-context
       nvim-treesitter-refactor
       nvim-notify
-      dashboard-nvim
       lualine-nvim
       tokyonight-nvim
 

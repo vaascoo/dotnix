@@ -1,14 +1,8 @@
-{pkgs, ...}: {
+{...}: {
   virtualisation = {
-    libvirtd.enable = true;
-    docker = {
+    podman = {
       enable = true;
-      daemon.settings = {
-        live-restore = false;
-      };
+      dockerCompat = true; 
     };
   };
-  environment.systemPackages = with pkgs; [
-    virtiofsd
-  ];
 }

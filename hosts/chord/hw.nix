@@ -10,9 +10,6 @@
 
   boot.initrd.availableKernelModules = ["usbhid" "nvme" "xhci_pci" "usb_storage" "sd_mod" "zfs"];
   boot.kernelParams = ["quiet"];
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r zroot/enc/root@blank
-  '';
 
   fileSystems."/" = {
     device = "zroot/enc/root";

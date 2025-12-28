@@ -9,7 +9,11 @@
         sign = "true";
       };
 
-      gpg.format = "ssh";
+      gpg = {
+        format = "ssh";
+        ssh.allowedSignersFile = "~/.config/git/allowed_signers";
+      };
+
       init.defaultBranch = "main";
       pull.rebase = true;
       url."git@github.com".pushinsteadOf = "https://github.com";
@@ -21,4 +25,13 @@
       };
     };
   };
+
+  # so git won't complain
+  home.file.".config/git/allowed_signers" = {
+    enable = true;
+    text = ''
+    # empty
+    '';
+  };
+
 }

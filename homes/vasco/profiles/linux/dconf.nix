@@ -16,7 +16,7 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/input-sources" = {
       sources = [ (mkTuple [ "xkb" "pt" ]) (mkTuple [ "xkb" "us" ]) ];
-      xkb-options = [ "terminate:ctrl_alt_bksp" ];
+      xkb-options = [ "grp:caps_toggle" ];
     };
 
     "org/gnome/desktop/interface" = {
@@ -119,7 +119,7 @@ with lib.hm.gvariant;
       switch-to-workspace-right = [];
       toggle-fullscreen = [ "<Super><Shift>f" ];
       unmaximize = [];
-      switch-input-source = [ "<Control>space" ];
+      switch-input-source = [ "gpr:caps_toggle" ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -213,8 +213,8 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Super>d";
-      command = "albert toggle";
-      name = "albert";
+      command = "vicinae toggle";
+      name = "vicinae";
     };
 
     "org/gnome/settings-daemon/plugins/power" = {
