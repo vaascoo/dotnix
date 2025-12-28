@@ -12,9 +12,6 @@
     lanzaboote.url = "github:nix-community/lanzaboote?ref=v0.4.3";
     latest.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nur.url = "github:nix-community/NUR";
-    spicetify.url = "github:Gerg-L/spicetify-nix";
-    spicetify.inputs.nixpkgs.follows = "nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   };
   outputs = inputs @ {...}: let

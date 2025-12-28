@@ -13,7 +13,6 @@
   inherit (inputs.home.nixosModules) home-manager;
   inherit (inputs.impermanence.nixosModules) impermanence;
   inherit (inputs.lanzaboote.nixosModules) lanzaboote;
-  inherit (inputs.spicetify.nixosModules) spicetify;
   golinkModule = inputs.golink.nixosModules.default;
 
   forEachSystem = fn: let
@@ -158,7 +157,6 @@
         };
       inherit lib;
     })
-    inputs.nur.overlays.default
     inputs.agenix.overlays.default
   ];
 
