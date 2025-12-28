@@ -1,0 +1,109 @@
+:100755 100755 bf62667 0000000 M	src/nixos-anywhere.sh
+
+diff --git a/src/nixos-anywhere.sh b/src/nixos-anywhere.sh
+index bf62667..d89c14a 100755
+--- a/src/nixos-anywhere.sh
++++ b/src/nixos-anywhere.sh
+@@ -26,9 +26,12 @@ machineSubstituters="y"
+ declare -A phases
+ phases[kexec]=1
+ phases[disko]=1
++phases[pre_install]=1
+ phases[install]=1
++phases[post_install]=1
+ phases[reboot]=1
+ 
++hookDir=
+ hardwareConfigBackend=none
+ hardwareConfigPath=
+ sshPrivateKeyFile=
+@@ -186,8 +189,12 @@ Options:
+   comma separated list of phases to run. Default is: kexec,disko,install,reboot
+   kexec: kexec into the nixos installer
+   disko: first unmount and destroy all filesystems on the disks we want to format, then run the create and mount mode
++  pre_install: run pre install hook
+   install: install the system
++  post_install: run post install hook
+   reboot: unmount the filesystems, export any ZFS pools and reboot the machine
++* --hook-dir
++  set the dir on which nixos-anywhere will search for hooks
+ * --disko-mode disko|mount|format
+   set the disko mode to format, mount or destroy. Default is disko.
+   disko: first unmount and destroy all filesystems on the disks we want to format, then run the create and mount mode
+@@ -300,6 +307,10 @@ parseArgs() {
+       printBuildLogs=y
+       set -x
+       ;;
++    --hook-dir)
++      hookDir=$2
++      shift
++      ;;
+     --disko-mode)
+       case "$2" in
+       format | mount | disko)
+@@ -344,7 +355,9 @@ parseArgs() {
+     --phases)
+       phases[kexec]=0
+       phases[disko]=0
++      phases[pre_install]=0
+       phases[install]=0
++      phases[post_install]=0
+       phases[reboot]=0
+       IFS=, read -r -a phaseList <<<"$2"
+       for phase in "${phaseList[@]}"; do
+@@ -355,20 +368,6 @@ parseArgs() {
+       done
+       shift
+       ;;
+-    --stop-after-disko)
+-      echo "WARNING: --stop-after-disko is deprecated, use --phases kexec,disko instead" 2>&1
+-      phases[kexec]=1
+-      phases[disko]=1
+-      phases[install]=0
+-      phases[reboot]=0
+-      ;;
+-    --no-reboot)
+-      echo "WARNING: --no-reboot is deprecated, use --phases kexec,disko,install instead" 2>&1
+-      phases[kexec]=1
+-      phases[disko]=1
+-      phases[install]=1
+-      phases[reboot]=0
+-      ;;
+     --from)
+       nixCopyOptions+=("--from" "$2")
+       shift
+@@ -1051,10 +1050,18 @@ SSH
+     runDisko "$diskoScript"
+   fi
+ 
++  if [[ ${phases[pre_install]} == 1 ]]; then
++    runHook pre_install.sh
++  fi
++
+   if [[ ${phases[install]} == 1 ]]; then
+     nixosInstall "$nixosSystem"
+   fi
+ 
++  if [[ ${phases[post_install]} == 1 ]]; then
++    runHook post_install.sh
++  fi
++
+   if [[ ${phases[reboot]} == 1 ]]; then
+     nixosReboot
+   fi
+@@ -1062,4 +1069,15 @@ SSH
+   step "Done!"
+ }
+ 
++runHook() {
++  step "running hook with args"
++  for arg in "$@"; do
++    echo "arg: $arg"
++  done
++
++  cat "$hookDir"/"$1" | ssh "${sshArgs[@]}" "$sshConnection" "cat > /tmp/hook.sh"
++  ssh "${sshArgs[@]}" "$sshConnection" "chmod +x /tmp/hook.sh"
++  ssh "${sshArgs[@]}" "$sshConnection" "/tmp/hook.sh"
++}
++
+ main "$@"

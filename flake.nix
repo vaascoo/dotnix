@@ -12,9 +12,12 @@
     lanzaboote.url = "github:nix-community/lanzaboote?ref=v0.4.3";
     latest.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # todo: find a better way to do this
+    nixos-anywhere.url = "github:nix-community/nixos-anywhere?ref=e86fad431cf9161ca39747972bd255897572dc3b";
+    nixos-anywhere.inputs.nixpkgs.follows = "nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = inputs @ {...}: let
+  outputs = inputs @ {self, ...}: let
     lib = inputs.nixpkgs.lib.extend (final: _: {
       unstable = inputs.unstable.lib;
       vasco = import ./lib {
@@ -25,7 +28,13 @@
   in {
     inherit lib;
     formatter = lib.vasco.exposeFormatter;
-    packages = lib.vasco.exposePackages {};
+    packages =
+      lib.vasco.exposePackages {}
+      // lib.vasco.forEachSystem (system: {
+        default =
+          inputs.nixos-anywhere.packages.${system}.default.overrideAttrs
+          (self: self // {patches = [./patches/01-pre-post-install-hooks.path];});
+      });
     homeConfigurations = lib.vasco.map {
       directory = ./homes;
       fn = lib.vasco.mkHomeManager;
@@ -35,5 +44,10 @@
       fn = lib.vasco.mkLinux;
     };
     diskoConfigurations = lib.vasco.exposeDisks;
+    devShells = lib.vasco.forEachSystem (system: {
+      default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
+        packages = [self.packages.${system}.default];
+      };
+    });
   };
 }
