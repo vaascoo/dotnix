@@ -6,6 +6,7 @@
     gnome-tweaks
     networkmanager-openvpn
     pinentry-gnome3
+    seahorse
   ];
 
   extensions = with pkgs.gnomeExtensions; [

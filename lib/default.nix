@@ -101,6 +101,7 @@
       inherit (config) system;
       specialArgs = {inherit configDir homesDir inputs;};
       specialArgs.profiles = mkProfiles "${profilesDir}";
+      specialArgs.hostConfig = config;
       modules = lib.flatten [
         golinkModule
         spicetify
