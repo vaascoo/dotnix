@@ -1,7 +1,8 @@
 let
   vasco = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOhkfgFv8yH7Td4QMadLFDCgMrXpI7QQaMNBM2YeN/+k";
-  raft = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMqYSdBgEOBpoB0eioYuCBiSN/OVlK4xX7dmJ6P9an9F";
+  sunny = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBjqtJ2S0g320DRRcufPHceTHZVn/8WKRDtJPENouqUg
+";
 in {
   "wireguard.age".publicKeys = [vasco];
-  "ovh.age".publicKeys = [vasco raft];
+  "ovh.age".publicKeys = [vasco sunny];
 }

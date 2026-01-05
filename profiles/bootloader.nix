@@ -13,14 +13,13 @@
   then {
     boot.bootspec.enable = true;
     environment.systemPackages = with pkgs; [sbctl];
-    boot.loader.systemd-boot.enable = lib.mkForce false;
 
-    # STATE: secureboot keys
-    # <url>
     boot.lanzaboote = {
       enable = true;
-      pkiBundle = "/nix/persist/etc/secureboot";
+      autoGenerateKeys.enable = hostConfig.secureboot.generateKeys;
+      autoEnrollKeys.enable = true;
       settings.editor = null;
+      pkiBundle = "/var/lib/sbctl/";
     };
   }
   else {

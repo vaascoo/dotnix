@@ -27,10 +27,12 @@
   exposePackages = {directory ? ../packages}:
     forEachSystem (
       system:
-        lib.filesystem.packagesFromDirectoryRecursive {
-          inherit (inputs.nixpkgs.legacyPackages."${system}") callPackage;
+        lib.filesystem.packagesFromDirectoryRecursive (let
+          pkgs = (mkPkgs inputs.nixpkgs (mkOverlays system)).${system};
+        in {
+          inherit (pkgs) callPackage;
           inherit directory;
-        }
+        })
     );
 
   exposeFormatter = forEachSystem (system: inputs.nixpkgs.legacyPackages."${system}".alejandra);
@@ -90,7 +92,10 @@
       disko.enable = false;
       home.enable = false;
       impermanence.enable = false;
-      secureboot.enable = false;
+      secureboot = {
+        enable = false;
+        generateKeys = false;
+      };
     };
     config = defaultConfig // import "${hostDir}/${hostname}/_config.nix" {};
     pkgs = (mkPkgs inputs.nixpkgs (mkOverlays config.system)).${config.system};
@@ -142,6 +147,7 @@
       vasco = (exposePackages {}).${system};
       unstable = (mkPkgs inputs.unstable []).${system};
       latest = (mkPkgs inputs.latest []).${system};
+      nixos-anywhere = inputs.nixos-anywhere.packages.${system}.nixos-anywhere;
       final =
         final
         // {

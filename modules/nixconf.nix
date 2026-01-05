@@ -16,6 +16,7 @@
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
     settings.experimental-features = ["nix-command" "flakes"];
+    settings.trusted-users = [ "vasco" ];
   };
 
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";

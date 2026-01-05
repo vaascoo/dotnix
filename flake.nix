@@ -9,7 +9,7 @@
     home.url = "github:nix-community/home-manager/release-25.11";
     home.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence/master";
-    lanzaboote.url = "github:nix-community/lanzaboote?ref=v0.4.3";
+    lanzaboote.url = "github:nix-community/lanzaboote?ref=v1.0.0";
     latest.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     # todo: find a better way to do this
@@ -28,13 +28,7 @@
   in {
     inherit lib;
     formatter = lib.vasco.exposeFormatter;
-    packages =
-      lib.vasco.exposePackages {}
-      // lib.vasco.forEachSystem (system: {
-        default =
-          inputs.nixos-anywhere.packages.${system}.default.overrideAttrs
-          (self: self // {patches = [./patches/01-pre-post-install-hooks.path];});
-      });
+    packages = lib.vasco.exposePackages {};
     homeConfigurations = lib.vasco.map {
       directory = ./homes;
       fn = lib.vasco.mkHomeManager;
@@ -44,9 +38,11 @@
       fn = lib.vasco.mkLinux;
     };
     diskoConfigurations = lib.vasco.exposeDisks;
-    devShells = lib.vasco.forEachSystem (system: {
-      default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
-        packages = [self.packages.${system}.default];
+    devShells = lib.vasco.forEachSystem (system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in {
+      default = pkgs.mkShell {
+        packages = pkgs.lib.attrValues self.packages.${system};
       };
     });
   };

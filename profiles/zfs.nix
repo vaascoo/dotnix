@@ -30,7 +30,6 @@
     environment.persistence."/nix/persist" = {
       hideMounts = true;
       directories = [
-        "/etc/secureboot"
         "/etc/nixos"
         "/etc/NetworkManager/system-connections"
         "/var/lib"

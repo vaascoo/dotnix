@@ -14,6 +14,23 @@
     };
   };
 
+  keybag = {
+    size = espSize;
+    content = {
+      type = "luks";
+      name = "keybag";
+      initrdUnlock = false;
+      # STATE (after secure boot is enabled):
+      # systemd-cryptenroll --tpm2-device=auto --unlock-key-file=/tmp/keybag.key /dev/disk/by-partlabel/disk-one-keybag
+      # systemd-cryptenroll --wipe-slot 0 /dev/disk/by-partlabel/disk-one-keybag
+      content = {
+        type = "filesystem";
+        format = "ext4";
+        mountpoint = null;
+      };
+    };
+  };
+
   zfs = {
     size = "100%";
     content = {
@@ -33,6 +50,7 @@
       normalization = "formD";
     };
     options.ashift = "12";
+    postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
 
     datasets = {
       "reserved" = {
@@ -73,7 +91,11 @@ in {
         content = {
           type = "gpt";
           partitions = {
-            inherit ESP zfs;
+            inherit
+              ESP
+              keybag
+              zfs
+              ;
           };
         };
       };
