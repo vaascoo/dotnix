@@ -3,7 +3,7 @@
   age.enable = true;
   disko = {
     enable = true;
-    config = "sunnyDisk";
+    config = "cloudyDisk";
   };
   home.enable = false;
   impermanence.enable = true;

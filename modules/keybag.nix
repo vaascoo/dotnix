@@ -21,7 +21,7 @@ in {
       default = [];
     };
   };
-  #STATE: first login needs to be done manually
+  # STATE: first login needs to be done manually
   config = lib.mkIf cfg.enable {
     boot.kernelParams = lib.flatten ((lib.optional cfg.enableDebugInitrd [
         "rd.systemd.debug_shell"

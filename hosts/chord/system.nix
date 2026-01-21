@@ -6,6 +6,7 @@
     base
     laptop
     golink
+    vpn
     zfs
   ];
 
