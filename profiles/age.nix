@@ -20,6 +20,16 @@
         file = "${configDir}/secrets/ovh.age";
         mode = "0600";
       };
+
+      authJwt = {
+        file = "${configDir}/secrets/authelia.jwt.age";
+        mode = "0600";
+      };
+
+      authKey = {
+        file = "${configDir}/secrets/authelia.key.age";
+        mode = "0600";
+      };
     };
   };
 }
