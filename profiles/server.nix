@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./auth.nix
     ./forgejo.nix
     ./shiori.nix
     ./torrent.nix
@@ -14,7 +15,23 @@
     enable = true;
     openFirewall = true;
     settings.PasswordAuthentication = false;
+    listenAddresses = [
+      {
+        addr = "127.0.0.1";
+        port = 22;
+      }
+      {
+        addr = "[::1]";
+        port = 22;
+      }
+      {
+        addr = "100.79.136.52";
+        port = 22;
+      }
+    ];
   };
+
+  networking.firewall.allowedTCPPorts = [2222];
 
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = 1;

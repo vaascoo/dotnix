@@ -27,6 +27,10 @@
         addr = "[::1]";
         port = 2222;
       }
+      {
+        addr = "100.79.136.52";
+        port = 2222;
+      }
   ];
 
   networking.firewall.allowedTCPPorts = [ 2222 ];
