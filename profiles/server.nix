@@ -5,8 +5,9 @@
   ...
 }: {
   imports = [
-    # ./forgejo.nix
-    # ./shiori.nix
+    ./forgejo.nix
+    ./shiori.nix
+    ./torrent.nix
   ];
 
   services.openssh = {
