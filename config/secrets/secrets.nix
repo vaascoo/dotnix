@@ -5,4 +5,5 @@ in {
   "ovh.age".publicKeys = [vasco cloudy];
   "authelia.jwt.age".publicKeys = [vasco cloudy];
   "authelia.key.age".publicKeys = [vasco cloudy];
+  "wpa_supplicant.conf.age".publicKeys = [vasco cloudy];
 }

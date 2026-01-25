@@ -1,9 +1,19 @@
-{profiles, ...}: {
+{
+  config,
+  profiles,
+  ...
+}: {
   imports = with profiles; [
     base
     server
     zfs
   ];
+
+  networking.supplicant = {
+    "wlp1s0" = {
+      configFile.path = config.age.secrets.wpaSupplicant.path;
+    };
+  };
 
   vasco.remoteUnlock = {
     enable = true;
