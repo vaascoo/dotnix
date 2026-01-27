@@ -29,10 +29,11 @@
     inherit lib;
     formatter = lib.vasco.exposeFormatter;
     packages = lib.vasco.exposePackages {};
-    homeConfigurations = lib.vasco.map {
-      directory = ./homes;
-      fn = lib.vasco.mkHomeManager;
-    };
+    homeConfigurations = lib.vasco.forEachSystem (system:
+      lib.vasco.map {
+        directory = ./homes;
+        fn = lib.vasco.mkHomeManager system;
+      });
     nixosConfigurations = lib.vasco.map {
       directory = ./hosts;
       fn = lib.vasco.mkLinux;
@@ -42,7 +43,11 @@
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in {
       default = pkgs.mkShell {
-        packages = pkgs.lib.attrValues self.packages.${system};
+        packages =
+          pkgs.lib.attrValues self.packages.${system}
+          ++ [
+            self.homeConfigurations.${system}.vasco.activationPackage
+          ];
       };
     });
   };

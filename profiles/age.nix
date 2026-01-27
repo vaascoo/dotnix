@@ -21,17 +21,17 @@
         mode = "0600";
       };
 
-      authJwt = {
-        file = "${configDir}/secrets/authelia.jwt.age";
-        mode = "0600";
-        owner = "authelia-main";
-      };
+      # authJwt = {
+      #   file = "${configDir}/secrets/authelia.jwt.age";
+      #   mode = "0600";
+      #   owner = "authelia-main";
+      # };
 
-      authKey = {
-        file = "${configDir}/secrets/authelia.key.age";
-        mode = "0600";
-        owner = "authelia-main";
-      };
+      # authKey = {
+      #   file = "${configDir}/secrets/authelia.key.age";
+      #   mode = "0600";
+      #   owner = "authelia-main";
+      # };
 
       wpaSupplicant = {
         file = "${configDir}/secrets/wpa_supplicant.conf.age";

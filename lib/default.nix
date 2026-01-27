@@ -165,7 +165,7 @@
     inputs.agenix.overlays.default
   ];
 
-  mkHomeManager = homeDir: userName: let
+  mkHomeManager = system: homeDir: userName: let
     modules = importRecursive "${homeDir}/${userName}/modules";
     profiles = mkProfiles "${homeDir}/${userName}/profiles";
     entryPoint = let
@@ -175,12 +175,11 @@
       then (import homeFile)
       else {};
   in
-    forEachSystem (system:
-      homeManagerConfiguration {
-        pkgs = mkPkgs inputs.nixpkgs system (mkOverlays system);
-        modules = modules ++ [entryPoint];
-        extraSpecialArgs = {inherit configDir inputs profiles;};
-      });
+    homeManagerConfiguration {
+      pkgs = (mkPkgs inputs.nixpkgs (mkOverlays system)).${system};
+      modules = modules ++ [entryPoint];
+      extraSpecialArgs = {inherit configDir inputs profiles;};
+    };
 in {
   inherit
     map

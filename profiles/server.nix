@@ -5,10 +5,10 @@
   ...
 }: {
   imports = [
-    ./auth.nix
     ./forgejo.nix
     ./shiori.nix
     ./torrent.nix
+    ./vpn.nix
   ];
 
   services.openssh = {

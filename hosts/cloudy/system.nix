@@ -9,10 +9,8 @@
     zfs
   ];
 
-  networking.supplicant = {
-    "wlp1s0" = {
-      configFile.path = config.age.secrets.wpaSupplicant.path;
-    };
+  networking.supplicant."wlp1s0" = {
+    configFile.path = config.age.secrets.wpaSupplicant.path;
   };
 
   vasco.remoteUnlock = {
